@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.ramboxeu.hypixel4j'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+// Creates a jar with dependencies included
+// This is mainly for development purpose
+task fatJar(type: org.gradle.jvm.tasks.Jar) {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    with jar
+}
